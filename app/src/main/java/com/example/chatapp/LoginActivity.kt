@@ -13,9 +13,13 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
+
+    lateinit var mAuthStateListener : FirebaseAuth.AuthStateListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        initMyAuthStateListener()
 
         textViewRegister.setOnClickListener{
             var intent=Intent(this,RegisterActivity::class.java)
@@ -33,7 +37,8 @@ class LoginActivity : AppCompatActivity() {
                            {
                                progressBarHide()
                                Toast.makeText(this@LoginActivity,"Successful login :"+FirebaseAuth.getInstance().currentUser?.email,Toast.LENGTH_SHORT).show()
-                               FirebaseAuth.getInstance().signOut()
+
+
                            }
                             else
                            {
@@ -57,5 +62,44 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun progressBarHide(){
         progressBarLogin.visibility= View.INVISIBLE
+    }
+
+    private fun initMyAuthStateListener()
+    {
+        mAuthStateListener=object :FirebaseAuth.AuthStateListener
+        {
+            override fun onAuthStateChanged(p0: FirebaseAuth) {
+                var user=p0.currentUser
+                if (user != null)
+                {
+                    if (user.isEmailVerified)
+                    {
+                        Toast.makeText(this@LoginActivity,"Mail approved login can be made.",Toast.LENGTH_SHORT).show()
+                        var intent=Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    }
+                    else
+                    {
+                        Toast.makeText(this@LoginActivity,"Confirm your e-mail address.",Toast.LENGTH_SHORT).show()
+                        FirebaseAuth.getInstance().signOut()
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    override fun onStart()
+    {
+        super.onStart()
+        FirebaseAuth.getInstance().addAuthStateListener(mAuthStateListener)
+    }
+    override fun onStop()
+    {
+        super.onStop()
+        FirebaseAuth.getInstance().removeAuthStateListener(mAuthStateListener)
     }
 }

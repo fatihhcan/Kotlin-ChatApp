@@ -43,6 +43,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (p0.isSuccessful)
                     {
                         Toast.makeText(this@RegisterActivity,"New account registration successful."+FirebaseAuth.getInstance().currentUser?.email, Toast.LENGTH_SHORT).show() // yeni kayit basarili
+                        sendConfirmationMail()
                         FirebaseAuth.getInstance().signOut() //kayit olduktan sonra var olan kullanici sistemden atilir
                     }
                     else
@@ -52,6 +53,28 @@ class RegisterActivity : AppCompatActivity() {
                 }
             })
         progressBarHide()
+    }
+    private fun sendConfirmationMail()
+    {
+        var user = FirebaseAuth.getInstance().currentUser
+        if (user != null)
+        {
+            user.sendEmailVerification()
+                .addOnCompleteListener(object :OnCompleteListener<Void>{
+                    override fun onComplete(p0: Task<Void>) {
+                        if (p0.isSuccessful)
+                        {
+                            Toast.makeText(this@RegisterActivity,"Check and confirm your mailbox.", Toast.LENGTH_SHORT).show() //maili kontrol et
+                        }
+                        else
+                        {
+                            Toast.makeText(this@RegisterActivity,"There was an error sending mail.", Toast.LENGTH_SHORT).show()// mail gonderilirken hata olsutu
+
+                        }
+                    }
+
+                })
+        }
     }
     private fun progressBarView(){
         progressBar.visibility= View.VISIBLE

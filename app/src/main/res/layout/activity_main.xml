@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sadece kayitli kullanicilar gorebilir"
+        android:text="WELCOME!!"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"
