@@ -25,6 +25,12 @@ class LoginActivity : AppCompatActivity() {
             var intent=Intent(this,RegisterActivity::class.java)
             startActivity(intent) //tiklandiginda gidilen sayfa
         }
+
+        textViewSendConfirmationMailAgain.setOnClickListener{
+            var dialogueView = DialogueFragment()
+            dialogueView.show(supportFragmentManager, "viewDialog")
+        }
+
         btnLogin.setOnClickListener {
             if(editTextEmail.text.isNotEmpty() && editTextPassword.text.isNotEmpty())
             {
@@ -36,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                            if (p0.isSuccessful)
                            {
                                progressBarHide()
-                               Toast.makeText(this@LoginActivity,"Successful login :"+FirebaseAuth.getInstance().currentUser?.email,Toast.LENGTH_SHORT).show()
+                             //  Toast.makeText(this@LoginActivity,"Successful login :"+FirebaseAuth.getInstance().currentUser?.email,Toast.LENGTH_SHORT).show()
 
 
                            }
@@ -56,6 +62,8 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity,"Fill in the blank fields.",Toast.LENGTH_SHORT).show()
             }
         }
+
+
     }
     private fun progressBarView(){
         progressBarLogin.visibility= View.VISIBLE
