@@ -42,6 +42,12 @@ class LoginActivity : AppCompatActivity() {
                            if (p0.isSuccessful)
                            {
                                progressBarHide()
+                               if (!p0.result?.user?.isEmailVerified!!)
+                               {
+                                   FirebaseAuth.getInstance().signOut()
+
+                               }
+
                              //  Toast.makeText(this@LoginActivity,"Successful login :"+FirebaseAuth.getInstance().currentUser?.email,Toast.LENGTH_SHORT).show()
 
 
@@ -91,7 +97,6 @@ class LoginActivity : AppCompatActivity() {
                     else
                     {
                         Toast.makeText(this@LoginActivity,"Confirm your e-mail address.",Toast.LENGTH_SHORT).show()
-                        FirebaseAuth.getInstance().signOut()
                     }
                 }
 
