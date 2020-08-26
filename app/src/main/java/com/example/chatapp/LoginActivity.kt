@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_forgot_password.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -31,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
             dialogueView.show(supportFragmentManager, "viewDialog")
         }
 
+        textViewForgotPassword.setOnClickListener{
+            var dialogPasswordResend=ForgotPasswordFragment()
+            dialogPasswordResend.show(supportFragmentManager,"viewDialogPassword")
+        }
         btnLogin.setOnClickListener {
             if(editTextEmail.text.isNotEmpty() && editTextPassword.text.isNotEmpty())
             {
