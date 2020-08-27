@@ -14,8 +14,46 @@
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.518" />
+
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="User Name :"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewUserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="User Email :"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewUserName"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
+
+    <TextView
+        android:id="@+id/textViewUserUid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="User UID :"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewUserEmail"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewUserEmail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

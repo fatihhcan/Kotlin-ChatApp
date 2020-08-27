@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,15 @@ class MainActivity : AppCompatActivity() {
         initAuthStateListener()
 
 
+    }
+
+    private fun setUserAbout() {
+        var user = FirebaseAuth.getInstance().currentUser
+        if (user != null){
+            textViewUserName.text = if (user.displayName.isNullOrEmpty()) "Defined" else user.displayName
+            textViewUserEmail.text = user.email
+            textViewUserUid.text = user.uid
+        }
     }
 
     private fun initAuthStateListener() {
@@ -56,6 +66,12 @@ class MainActivity : AppCompatActivity() {
                 logOut()
                 return true
             }
+            R.id.userSettings -> {
+                var intent=Intent(this,UserSettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+
         }
 
         return super.onOptionsItemSelected(item)
@@ -68,6 +84,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         userControl()
+        setUserAbout()
+
     }
 
     private fun userControl() {
