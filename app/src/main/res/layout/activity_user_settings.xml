@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Current Email:"
-        android:textStyle="bold"
+        android:text="Current Password:"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="@+id/textView3"
@@ -36,19 +36,18 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="52dp"
         android:text="User Name:"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDetailName"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextDetailMail"
+        android:id="@+id/editTextDetailPassword"
         android:layout_width="252dp"
         android:layout_height="43dp"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:hint="Current Password"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/editTextDetailName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextDetailName"
@@ -58,11 +57,11 @@
         android:id="@+id/btnSaveChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="Save Changes"
-        app:layout_constraintEnd_toEndOf="@+id/editTextDetailMail"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDetailMail" />
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextDetailPassword"
+        app:layout_constraintTop_toTopOf="@+id/btnPasswordSend" />
 
     <Button
         android:id="@+id/btnPasswordSend"
@@ -71,7 +70,94 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:text="RESET PASSWORD"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDetailMail" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDetailPassword" />
+
+    <Button
+        android:id="@+id/btnPasswordMailUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAIL - PASSWORD UPDATE"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnSaveChanges"
+        app:layout_constraintStart_toEndOf="@+id/btnPasswordSend"
+        app:layout_constraintTop_toTopOf="@+id/btnPasswordSend" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/updateLayout"
+        android:layout_width="383dp"
+        android:layout_height="381dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPasswordMailUpdate">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="New Email :"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextNewMail" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="44dp"
+            android:text="New Password :"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <EditText
+            android:id="@+id/editTextNewMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextNewPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/editTextNewMail"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/editTextNewMail"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNewMail" />
+
+        <Button
+            android:id="@+id/btnUpdatePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="28dp"
+            android:text="Update Password"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNewPassword" />
+
+        <Button
+            android:id="@+id/btnUpdateMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="36dp"
+            android:text="Update Mail"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNewPassword" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
