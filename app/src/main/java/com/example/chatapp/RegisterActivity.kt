@@ -1,5 +1,6 @@
 package com.example.chatapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -42,9 +44,27 @@ class RegisterActivity : AppCompatActivity() {
                 override fun onComplete(p0: Task<AuthResult>) {
                     if (p0.isSuccessful)
                     {
-                        Toast.makeText(this@RegisterActivity,"New account registration successful."+FirebaseAuth.getInstance().currentUser?.email, Toast.LENGTH_SHORT).show() // yeni kayit basarili
                         sendConfirmationMail()
-                        FirebaseAuth.getInstance().signOut() //kayit olduktan sonra var olan kullanici sistemden atilir
+
+                        var databaseAddUser=User()
+                        databaseAddUser.name=editTextEmail.toString().substring(0,editTextEmail.toString().indexOf("@"))
+                        databaseAddUser.user_id=FirebaseAuth.getInstance().currentUser?.uid
+                        databaseAddUser.image_profile=""
+                        databaseAddUser.phone="099203"
+                        databaseAddUser.level="1"
+
+                        FirebaseDatabase.getInstance().reference
+                            .child("user")
+                            .child(FirebaseAuth.getInstance().currentUser?.uid.toString())
+                            .setValue(databaseAddUser).addOnCompleteListener { task->
+                                if (task.isSuccessful){
+                                    Toast.makeText(this@RegisterActivity,"New account registration successful."+FirebaseAuth.getInstance().currentUser?.email, Toast.LENGTH_SHORT).show() // yeni kayit basarili
+                                    FirebaseAuth.getInstance().signOut() //kayit olduktan sonra var olan kullanici sistemden atilir
+                                    loginPageRoute()
+
+                                }
+                            }
+
                     }
                     else
                     {
@@ -81,5 +101,10 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun progressBarHide(){
         progressBar.visibility= View.INVISIBLE
+    }
+    private fun loginPageRoute(){
+        var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
